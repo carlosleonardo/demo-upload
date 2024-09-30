@@ -6,8 +6,7 @@
       <input
         type="file"
         id="arquivos"
-        (change)="onFileChange()"
-        [(ngModel)]="arquivos"
+        (change)="onFileChange($event)"
         accept="image/*"
         class="form-control"
       />
