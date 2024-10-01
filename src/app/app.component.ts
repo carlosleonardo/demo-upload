@@ -15,12 +15,19 @@ export class AppComponent {
   arquivo$!: Observable<File>;
 
   servicoUpload = inject(UploadArquivoService);
+  urlImagem: string = '';
 
   onFileChange(e: Event) {
     const inputfiles = e.target as HTMLInputElement;
 
-    console.log(inputfiles.files);
-    if (inputfiles.files) this.arquivo = inputfiles.files[0];
+    if (inputfiles.files) {
+      this.arquivo = inputfiles.files[0];
+      const leitorArquivo = new FileReader();
+      leitorArquivo.onload = (e) => {
+        this.urlImagem = leitorArquivo.result as string;
+      };
+      leitorArquivo.readAsDataURL(this.arquivo);
+    }
   }
 
   aoEnviar(e: Event) {
