@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UploadArquivoService } from './servicos/upload-arquivo.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,15 +10,11 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnDestroy {
-  ngOnDestroy(): void {
-    this.inscricao?.unsubscribe();
-  }
+export class AppComponent {
   arquivo: File = {} as File;
-  arquivo$!: Observable<Object>;
+  arquivo$!: Observable<File>;
 
   servicoUpload = inject(UploadArquivoService);
-  inscricao: Subscription | undefined;
 
   onFileChange(e: Event) {
     const inputfiles = e.target as HTMLInputElement;
@@ -31,7 +27,9 @@ export class AppComponent implements OnDestroy {
     e.preventDefault();
     console.log(this.arquivo);
     this.arquivo$ = this.servicoUpload.uploadArquivo(this.arquivo);
-    this.inscricao = this.arquivo$.subscribe((arquivo) => console.log(arquivo));
+    this.arquivo$.subscribe((arquivo) => {
+      alert(`Arquivo ${this.arquivo.name} enviado com sucesso!`);
+    });
   }
   title = 'Demonstração de Upload';
 }

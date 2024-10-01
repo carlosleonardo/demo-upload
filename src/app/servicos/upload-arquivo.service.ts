@@ -9,9 +9,9 @@ export class UploadArquivoService {
   private http = inject(HttpClient);
   private readonly url = 'http://localhost:5022/upload';
 
-  uploadArquivo(arquivo: File): Observable<Object> {
+  uploadArquivo(arquivo: File): Observable<File> {
     const formData = new FormData();
     formData.append('file', arquivo);
-    return this.http.post(this.url, formData);
+    return this.http.post<File>(this.url, formData);
   }
 }
