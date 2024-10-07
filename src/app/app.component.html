@@ -17,13 +17,13 @@
       <img
         [src]="urlImagem"
         [alt]="urlImagem"
-        height="320"
-        width="320"
+        [style.width]="'320px'"
+        [style.height]="'auto'"
         class="mt-3"
       />
-
       }
     </form>
   </div>
 </div>
+
 <router-outlet />
