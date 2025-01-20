@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { UploadArquivoService } from './servicos/upload-arquivo.service';
 import { Observable } from 'rxjs';
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, FormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+    selector: 'app-root',
+    imports: [RouterOutlet, FormsModule],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   arquivo: File = {} as File;
